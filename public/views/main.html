@@ -1,0 +1,27 @@
+<div class="row" ng-controller="MainCtrl">
+	<div class="col s6">
+		<form class="pthInput form-group">
+	        <input type="text" name="distance" placeholder="Distance" ng-model="newData.distance">
+	        <input type="text" name="pth"  placeholder="Proximity to Hole" ng-model="newData.pth">
+	        <input type="text" name="direction"  placeholder="Direction" ng-model="newData.direction">
+			<input class="btn btn-success" type="submit" ng-click="addToTable(newData)" value="Add" />
+	    </form>
+    </div>
+
+    <div class="col s6">
+    	<table class="bordered">
+    		<thead>
+    			<th>Distance</th>
+    			<th>Proximity to Hole</th>
+    			<th>Direction</th>
+    		</thead>
+    		<tbody>
+    			<tr ng-repeat="row in table">
+    				<td>{{row.distance}}</td>
+    				<td>{{row.pth}}</td>
+    				<td>{{row.direction}}</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    </div>
+</div>

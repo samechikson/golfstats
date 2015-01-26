@@ -1,0 +1,11 @@
+{
+    "name": "golf-data-mean",
+    "version": "1.0.0",
+    "dependencies": {
+    	"materialize": "latest",
+        "font-awesome": "latest",
+        "animate.css": "latest",
+        "angular": "latest",
+        "angular-route": "latest"   
+    }
+}
