@@ -1,6 +1,6 @@
 angular.module('golfDataMeanApp', 
 	['ngRoute',
-	 'Pth'
+	 'Db'
 	])
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 

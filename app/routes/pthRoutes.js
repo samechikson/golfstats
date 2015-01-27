@@ -1,43 +1,9 @@
-//  // app/routes.js
-
-// // grab the nerd model we just created
-// var pth = require('./models/pth');
-
-// module.exports = function(app) {
-
-//     // server routes ===========================================================
-//     // handle things like api calls
-//     // authentication routes
-
-//     app.get('/api/pths', function(req, res) {
-//         // use mongoose to get all nerds in the database
-//         pth.find(function(err, pths) {
-
-//             // if there is an error retrieving, send the error. 
-//                             // nothing after res.send(err) will execute
-//             if (err)
-//                 res.send(err);
-
-//             res.json(pths); // return all nerds in JSON format
-//         });
-//     });
-
-//     // route to handle creating goes here (app.pth)
-//     // route to handle delete goes here (app.delete)
-
-//     // frontend routes =========================================================
-//     // route to handle all angular requests
-//     app.get('*', function(req, res) {
-//         res.sendfile('./public/views/index.html'); // load our public/index.html file
-//     });
-
-// };
-
+//  // app/routes/pthRoutes.js
 
 module.exports = function(app) {
   // Module dependencies.
   var mongoose = require('mongoose'),
-      Pth = require('./models/pth'),
+      Pth = require('../models/pth'),
       api = {};
 
   // ALL
@@ -46,7 +12,7 @@ module.exports = function(app) {
       if (err) {
         res.json(500, err);
       } else {    
-        res.json({pths: pths});
+        res.json(pths);
       }
     });
   };
@@ -62,6 +28,21 @@ module.exports = function(app) {
       }
     });
   };
+
+  api.pthsId = function(req, res) {
+    var id = req.params.id;
+    var field = req.params.field;
+    if (field == 'tournament') id = mongoose.Types.ObjectId(id);
+    var query = {};
+    query[field] = id;
+    Pth.find(query, function(err, pths) {
+      if (err) {
+        res.json(404, err);
+      } else {
+        res.json(pths);
+      }
+    });
+  }
 
   // POST
   api.addPth = function (req, res) {
@@ -128,6 +109,7 @@ module.exports = function(app) {
 
 
   app.get('/api/pths', api.pths);
+  app.get('/api/pths/:field/:id', api.pthsId);
   app.get('/api/pth/:id', api.pth);
   app.post('/api/pth', api.addPth);
   app.put('/api/pth/:id', api.editPth);

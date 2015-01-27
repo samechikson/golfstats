@@ -1,5 +1,7 @@
 <div class="row" ng-controller="MainCtrl">
 	<div class="col s6">
+        <h4>{{tournament.name}}</h4>
+        <p>{{tournament.tour}}, {{tournament.location}}</p>
 		<form class="pthInput form-group">
 	        <input type="text" name="distance" placeholder="Distance" ng-model="newData.distance">
 	        <input type="text" name="pth"  placeholder="Proximity to Hole" ng-model="newData.pth">

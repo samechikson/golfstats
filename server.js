@@ -30,7 +30,8 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public')); 
 
 // routes ==================================================
-require('./app/routes')(app); // configure our routes
+require('./app/routes/pthRoutes')(app); // configure our routes
+require('./app/routes/tournamentRoutes')(app);
 
 // start app ===============================================
 // startup our app at http://localhost:8080
