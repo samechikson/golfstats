@@ -12,7 +12,11 @@
 				</a>
 			</li>
 		</ul>
-		<p>Create new tournament</p>
+		<p ng-controller="newTournamentModalCtrl">
+			<button class="waves-effect waves-light btn" ng-click="open()">
+				<i class="mdi-content-add left"></i>&nbsp;Create new tournament
+			</button>
+		</p>
 	</div>
 
 	<div class="col s6 tournamentInfo">
@@ -21,26 +25,4 @@
 		<p>{{selectedTourney.startDate}} - {{selectedTourney.endDate}}</p>
 	</div>
 
-</div>
-
-<div ng-controller="newTournamentModalCtrl">
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Im a modal!</h3>
-        </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a ng-click="selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
-    <button class="btn btn-default" ng-click="open()">Open me!</button>
 </div>

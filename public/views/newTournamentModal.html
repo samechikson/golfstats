@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h4 class="modal-title">New Tournament</h4>
+</div>
+<div class="modal-body row">
+    <form>
+        <div class="input-field col s6">
+            <input id="name" type="text" class="validate">
+            <label for="name">Name</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="tour" type="text" class="validate">
+            <label for="tour">Tour</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="startDate" type="date" class="datepicker">
+        </div>
+        <div class="input-field col s6">
+            <input id="endDate" type="date" class="datepicker">
+        </div>
+        <div class="input-field col s6">
+            <input id="location" type="text" class="validate">
+            <label for="location">Location</label>
+        </div>
+        <div class="input-field col s6">
+            <button class="waves-effect waves-light btn" ng-click="ok()">OK</button>
+            <button class="waves-effect waves-light btn red" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

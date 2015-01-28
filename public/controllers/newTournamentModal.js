@@ -1,44 +1,32 @@
 'use strict';
 
 angular.module('golfDataMeanApp')
-.controller('newTournamentModalCtrl', function ($scope, $modal, $log) {
-
-  $scope.items = ['item1', 'item2', 'item3'];
+.controller('newTournamentModalCtrl', ['$scope', '$modal', function ($scope, $modal) {
 
   $scope.open = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'myModalContent.html',
+      templateUrl: 'views/newTournamentModal.html',
       controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        items: function () {
-          return $scope.items;
-        }
-      }
+      size: size
     });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
+    modalInstance.result.then(function () {
+
     }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
+      console.info('Modal dismissed at: ' + new Date());
     });
   };
-});
+}]);
 
 angular.module('golfDataMeanApp')
-.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
-
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
+.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance, items) {
 
   $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
+    $modalInstance.close('done');
   };
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-});
+}]);
