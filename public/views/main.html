@@ -20,8 +20,9 @@
 	<div class="col s6 tournamentInfo">
 		<h5>{{selectedTourney.name}}</h5>
 		<p>{{selectedTourney.location}}, {{selectedTourney.tour}}</p>
-		<p>{{selectedTourney.startDate}} - {{selectedTourney.endDate}}</p>
+		<p>{{selectedTourney.startDate | date}} - {{selectedTourney.endDate | date}}</p>
 
+		<a href="" class="waves-effect waves-light btn red" ng-click="deleteTourney(selectedTourney._id)">delete</a>
 	</div>
 
 </div>

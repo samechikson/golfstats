@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('golfDataMeanApp')
-.controller('MainCtrl', ['$scope', 'DbService', function ($scope, DbService) {
+.controller('MainCtrl', ['$scope', '$route', 'DbService', function ($scope, $route, DbService) {
 	$scope.tournaments = [];
 	$scope.selectedTourney = {};
 
@@ -14,5 +14,11 @@ angular.module('golfDataMeanApp')
 
 	$scope.changeSelected = function(tourney){
 		$scope.selectedTourney = tourney;
+	}
+
+	$scope.deleteTourney = function(tourneyId){
+		console.log(tourneyId);
+		DbService.delete('tournament', tourneyId);
+		$route.reload();
 	}
 }]);
