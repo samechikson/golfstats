@@ -5,12 +5,10 @@
 <div class="row" ng-controller="MainCtrl">
 	<div class="col s6">
 		<ul class="collection">
-			<li class="collection-item" ng-repeat="tourney in tournaments">
-				<a href="/pth/{{tourney._id}}">
-					{{tourney.name}}
-					<i class="mdi-content-send pull-right"></i>
-				</a>
-			</li>
+			<a href="/pth/{{tourney._id}}" ng-repeat="tourney in tournaments" ng-mouseover="changeSelected(tourney)" class="collection-item">
+				{{tourney.name}}
+				<i class="mdi-content-send pull-right"></i>
+			</a>
 		</ul>
 		<p ng-controller="newTournamentModalCtrl">
 			<button class="waves-effect waves-light btn" ng-click="open()">
@@ -23,6 +21,7 @@
 		<h5>{{selectedTourney.name}}</h5>
 		<p>{{selectedTourney.location}}, {{selectedTourney.tour}}</p>
 		<p>{{selectedTourney.startDate}} - {{selectedTourney.endDate}}</p>
+
 	</div>
 
 </div>

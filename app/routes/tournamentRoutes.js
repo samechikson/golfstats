@@ -35,7 +35,7 @@ module.exports = function(app) {
     var tournament;
     console.log(req.body);
       
-    if(typeof req.body.tournament == 'undefined'){
+    if(typeof req.body == 'undefined'){
       return res.json(500, {message: 'tournament is undefined'});
     }
 
@@ -46,6 +46,7 @@ module.exports = function(app) {
         console.log("created tournament");
         return res.json(201, tournament.toObject());
       } else {
+         console.log(err)
          return res.json(500, err);
       }
     });

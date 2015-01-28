@@ -4,21 +4,21 @@
 <div class="modal-body row">
     <form>
         <div class="input-field col s6">
-            <input id="name" type="text" class="validate">
+            <input id="name" type="text" class="validate" ng-model="tournament.name" required>
             <label for="name">Name</label>
         </div>
         <div class="input-field col s6">
-            <input id="tour" type="text" class="validate">
+            <input id="tour" type="text" class="validate" ng-model="tournament.tour">
             <label for="tour">Tour</label>
         </div>
         <div class="input-field col s6">
-            <input id="startDate" type="date" class="datepicker">
+            <input id="startDate" type="date" class="datepicker" ng-model="tournament.startDate" required>
         </div>
         <div class="input-field col s6">
-            <input id="endDate" type="date" class="datepicker">
+            <input id="endDate" type="date" class="datepicker" ng-model="tournament.endDate" required>
         </div>
         <div class="input-field col s6">
-            <input id="location" type="text" class="validate">
+            <input id="location" type="text" class="validate" ng-model="tournament.location">
             <label for="location">Location</label>
         </div>
         <div class="input-field col s6">

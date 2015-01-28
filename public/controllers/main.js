@@ -12,4 +12,7 @@ angular.module('golfDataMeanApp')
 	});
 
 
+	$scope.changeSelected = function(tourney){
+		$scope.selectedTourney = tourney;
+	}
 }]);

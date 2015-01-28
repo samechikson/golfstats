@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('golfDataMeanApp')
-.controller('newTournamentModalCtrl', ['$scope', '$modal', function ($scope, $modal) {
+.controller('newTournamentModalCtrl', ['$scope', '$modal', '$route','DbService', function ($scope, $modal, $route, DbService) {
+  console.log($scope);
 
   $scope.open = function (size) {
 
@@ -11,7 +12,11 @@ angular.module('golfDataMeanApp')
       size: size
     });
 
-    modalInstance.result.then(function () {
+    modalInstance.result.then(function (data) {
+      console.log(data);
+
+      DbService.create('tournament', data);
+      $route.reload();
 
     }, function () {
       console.info('Modal dismissed at: ' + new Date());
@@ -23,7 +28,8 @@ angular.module('golfDataMeanApp')
 .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance, items) {
 
   $scope.ok = function () {
-    $modalInstance.close('done');
+    if ($scope.tournament.name.length > 0)
+      $modalInstance.close($scope.tournament);
   };
 
   $scope.cancel = function () {
