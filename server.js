@@ -33,6 +33,13 @@ app.use(express.static(__dirname + '/public'));
 require('./app/routes/pthRoutes')(app); // configure our routes
 require('./app/routes/tournamentRoutes')(app);
 
+// app.get('*', function(req, res){
+//     res.render('index');
+// });
+app.use(function(req, res) {
+    res.sendfile(__dirname + '/public/index.html');
+});
+
 // start app ===============================================
 // startup our app at http://localhost:8080
 app.listen(port);               

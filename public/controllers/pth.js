@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('golfDataMeanApp')
-  .controller('PthCtrl', ['$scope', '$routeParams', 'DbService', function ($scope, $routeParams, DbService) {
+  .controller('PthCtrl', ['$scope', '$routeParams', '$route', 'DbService', function ($scope, $routeParams, $route, DbService) {
 	$scope.newData = {};
     $scope.table = [];
     $scope.tournament = {};
@@ -34,11 +34,7 @@ angular.module('golfDataMeanApp')
 
         DbService.create('pth', data);
        // refresh table
-        DbService.getAllWithFieldId('pth', 'tournament', $scope.tournament._id).then(function(response){
-            $scope.table = response.data;
-        }, function(err){
-            console.warn(err);
-        });
+        $route.reload();
 
     	document.querySelector('input:first-of-type').focus();
     };
