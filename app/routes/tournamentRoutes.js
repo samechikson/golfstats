@@ -12,7 +12,7 @@ module.exports = function(app) {
       if (err) {
         res.json(500, err);
       } else {    
-        res.json({tournaments: tournaments});
+        res.json(tournaments);
       }
     });
   };
@@ -24,7 +24,7 @@ module.exports = function(app) {
       if (err) {
         res.json(404, err);
       } else {
-        res.json(200, {tournament: tournament});
+        res.json(200, tournament);
       }
     });
   };

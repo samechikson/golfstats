@@ -1,29 +1,23 @@
+<div class="row">
+	<h4>Tournaments page</h4>
+	<p>Choose your tournament</p>
+</div>
 <div class="row" ng-controller="MainCtrl">
 	<div class="col s6">
-        <h4>{{tournament.name}}</h4>
-        <p>{{tournament.tour}}, {{tournament.location}}</p>
-		<form class="pthInput form-group">
-	        <input type="text" name="distance" placeholder="Distance" ng-model="newData.distance">
-	        <input type="text" name="pth"  placeholder="Proximity to Hole" ng-model="newData.pth">
-	        <input type="text" name="direction"  placeholder="Direction" ng-model="newData.direction">
-			<input class="btn btn-success" type="submit" ng-click="addToTable(newData)" value="Add" />
-	    </form>
-    </div>
+		<ul class="collection">
+			<li class="collection-item" ng-repeat="tourney in tournaments">
+				<a href="/pth/{{tourney._id}}">
+					{{tourney.name}}
+					<i class="mdi-content-send pull-right"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
 
-    <div class="col s6">
-    	<table class="bordered">
-    		<thead>
-    			<th>Distance</th>
-    			<th>Proximity to Hole</th>
-    			<th>Direction</th>
-    		</thead>
-    		<tbody>
-    			<tr ng-repeat="row in table">
-    				<td>{{row.distance}}</td>
-    				<td>{{row.pth}}</td>
-    				<td>{{row.direction}}</td>
-    			</tr>
-    		</tbody>
-    	</table>
-    </div>
+	<div class="col s6 tournamentInfo">
+		<h5>{{selectedTourney.name}}</h5>
+		<p>{{selectedTourney.location}}, {{selectedTourney.tour}}</p>
+		<p>{{selectedTourney.startDate}} - {{selectedTourney.endDate}}</p>
+	</div>
+
 </div>
