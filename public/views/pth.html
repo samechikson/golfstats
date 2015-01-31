@@ -29,18 +29,21 @@
     			<th>Distance</th>
     			<th>Proximity to Hole</th>
     			<th>Direction</th>
+                <th></th>
     		</thead>
     		<tbody>
     			<tr ng-repeat="row in table">
     				<td>{{row.distance}}</td>
     				<td>{{row.pth}}</td>
     				<td>{{row.direction}}</td>
+                    <td ng-click="deletePth(row._id)"><a href=""><i class="mdi-content-clear"></i></a></td>
     			</tr>
     		</tbody>
     	</table>
     </div>
 
     <div class="col s6">
-        <div class="pth-graph grow" pth-graph="{{tournament._id}}"></div> 
+        <!-- <div class="pth-graph grow" pth-graph="{{tournament._id}}"></div>  -->
+        <!-- <div line-graph></div> -->
     </div>
 </div>

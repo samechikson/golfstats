@@ -5,6 +5,8 @@ angular.module('golfDataMeanApp')
 	$scope.newData = {};
     $scope.table = [];
     $scope.tournament = {};
+    
+    document.querySelector('input:first-of-type').focus();
 
     DbService.getById('tournament', $routeParams.tournamentId).then(function(response){
         $scope.tournament = response.data;
@@ -32,10 +34,17 @@ angular.module('golfDataMeanApp')
     	console.log(data);
     	$scope.newData = {};
 
-        DbService.create('pth', data);
-       // refresh table
-        $route.reload();
-
-    	document.querySelector('input:first-of-type').focus();
+        DbService.create('pth', data).then(function(){
+            //success
+            // refresh table
+            $route.reload();
+        });
     };
+
+    $scope.deletePth = function(id){
+        DbService.delete('pth', id).then(function(response){
+            //success
+            $route.reload();
+        });
+    }
   }]);
