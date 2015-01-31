@@ -2,11 +2,11 @@ angular.module('golfDataMeanApp')
 	.directive('pthGraph', function() {
 	    return {
 	      restrict: 'EA',
-	      scope: '=',
+	      scope: false,
 	      controller: 'pthGraphCtrl',
-      	  link: function(scope, element, attrs, graphCtrl) {
-      	  	console.log(attrs);
-      	  	graphCtrl.init(element[0], {tournamentId: "54c68b26de010150e30a078b",
+      	  link: function($scope, element, attrs, graphCtrl) {
+      	  	console.log($scope.graphCtrl);
+      	  	graphCtrl.init(element[0], {tournamentId: "54c934f0bc2643662be24953",
       	  								min: 50, 
       	  								max: 300, 
       	  								withGrid: false, 
@@ -19,8 +19,8 @@ angular.module('golfDataMeanApp')
 angular.module('golfDataMeanApp')
   .controller('pthGraphCtrl', ['d3Service', 'DbService', function(d3Service, DbService) {
     this.margin = {top: 20, right: 20, bottom: 20, left: 20};
-    this.width = 0;
-    this.height = 0;
+    this.width = 300;
+    this.height = 300;
 
     this.min = 125;
     this.max = 150;
@@ -30,8 +30,8 @@ angular.module('golfDataMeanApp')
     this.init = function(element, opts){
       d3Service.d3().then(function(d3) {
 
-        thisGraph.width = element.offsetWidth - thisGraph.margin.left - thisGraph.margin.right;
-        thisGraph.height = element.offsetWidth/2 - thisGraph.margin.top - thisGraph.margin.bottom;
+        thisGraph.width = element.parentNode.clientWidth - thisGraph.margin.left - thisGraph.margin.right;
+        thisGraph.height = element.parentNode.clientWidth/2 - thisGraph.margin.top - thisGraph.margin.bottom;
 
         thisGraph.svg = d3.select(element).append('svg')
             .attr('width', thisGraph.width + thisGraph.margin.left + thisGraph.margin.right)
@@ -149,7 +149,6 @@ angular.module('golfDataMeanApp')
       // });
 
 		thisGraph.data = DbService.getAllWithFieldId('pth', 'tournament', src);
-		console.log(src);
     };
 
     this.makeViz = function(dots){
@@ -168,6 +167,7 @@ angular.module('golfDataMeanApp')
     };
 
     this.samDots = function(rows){
+      console.log(rows);
       var dotGroup = thisGraph.graph.append('g')
         .attr('class', 'dots')
         .attr('transform', 'translate(' + thisGraph.width/2 + ',' + thisGraph.height/2 + ')');
@@ -199,6 +199,7 @@ angular.module('golfDataMeanApp')
     };
 
     this.samCircle = function(rows){
+      console.log(rows);
       var samCircle = {E: {value: 0, count: 0, angle: 0}, 
                     SE: {value: 0, count: 0, angle: Math.PI/4},
                     S: {value: 0, count: 0, angle: Math.PI/2},
@@ -210,7 +211,7 @@ angular.module('golfDataMeanApp')
       var samCircleData = [];
 
       for (var i in rows){
-        samCircle[rows[i].direction].value += rows[i].PTH;
+        samCircle[rows[i].direction].value += rows[i].pth;
         samCircle[rows[i].direction].count++;
       }
 
@@ -224,6 +225,7 @@ angular.module('golfDataMeanApp')
         samCircleData.push({x: xSam, y: ySam});
 
       }
+      console.log(samCircleData);
 
       thisGraph.graph.append('path')
         .attr('class', 'samCircle')
