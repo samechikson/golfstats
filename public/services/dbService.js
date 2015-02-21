@@ -3,6 +3,7 @@ angular.module('Db', []).factory('DbService', ['$http', function($http) {
     return {
         // call to get all
         getAll : function(collection) {
+            console.log("getting all from " + collection +" collection")
             return $http.get('/api/'+collection+'s');
         },
 

@@ -1,16 +1,21 @@
 angular.module('golfDataMeanApp')
 	.directive('pthGraph', function() {
 	    return {
-	      restrict: 'EA',
-	      scope: false,
+	      restrict: 'E',
+	      scope: {tournament: '@'},
 	      controller: 'pthGraphCtrl',
-      	  link: function($scope, element, attrs, graphCtrl) {
-      	  	console.log($scope.graphCtrl);
-      	  	graphCtrl.init(element[0], {tournamentId: "54c934f0bc2643662be24953",
-      	  								min: 50, 
-      	  								max: 300, 
-      	  								withGrid: false, 
-      	  								withDots: false});
+      	link: function(scope, element, attrs, graphCtrl) {
+            attrs.$observe('tournament', function(changedValue){
+               console.log(attrs.tournament);
+             
+          	  	if (attrs.tournament){
+                  graphCtrl.init(element[0], {tournamentId: attrs.tournament,
+          	  								min: 50, 
+          	  								max: 300, 
+          	  								withGrid: true, 
+          	  								withDots: false});
+                }
+            });    
 		  }
 		};
 
@@ -55,7 +60,7 @@ angular.module('golfDataMeanApp')
         opts.withGrid && thisGraph.makeGrid(d3);// jshint ignore:line
         thisGraph.getData(opts.tournamentId);
         thisGraph.makeViz(opts.withDots);
-        thisGraph.addTitle(opts.min + ' to ' + opts.max +'m');
+//        thisGraph.addTitle(opts.min + ' to ' + opts.max +'m');
 
       });
     };
@@ -199,7 +204,7 @@ angular.module('golfDataMeanApp')
     };
 
     this.samCircle = function(rows){
-      console.log(rows);
+      //console.log(rows);
       var samCircle = {E: {value: 0, count: 0, angle: 0}, 
                     SE: {value: 0, count: 0, angle: Math.PI/4},
                     S: {value: 0, count: 0, angle: Math.PI/2},
@@ -225,7 +230,7 @@ angular.module('golfDataMeanApp')
         samCircleData.push({x: xSam, y: ySam});
 
       }
-      console.log(samCircleData);
+      //console.log(samCircleData);
 
       thisGraph.graph.append('path')
         .attr('class', 'samCircle')

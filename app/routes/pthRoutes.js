@@ -42,7 +42,7 @@ module.exports = function(app) {
         res.json(pths);
       }
     });
-  }
+  };
 
   // POST
   api.addPth = function (req, res) {

@@ -1,49 +1,58 @@
-<div class="row" ng-controller="PthCtrl">
-	<div class="col s4">
-        <h4>{{tournament.name}}</h4>
-        <p>{{tournament.tour}}, {{tournament.location}}</p>
+<div ng-controller="PthCtrl">
+    <div class="row">
+    	<div class="col s4">
+            <h4>{{tournament.name}}</h4>
+            <p>{{tournament.tour}}, {{tournament.location}}</p>
+        </div>
+
+        <p class="col s8">
+        <form class="pthInput form-group">
+            <div class="col s2">
+                <input type="text" name="distance" placeholder="Distance" ng-model="newData.distance">
+            </div>
+            <div class="col s2">
+                <input type="text" name="pth"  placeholder="Proximity to Hole" ng-model="newData.pth">
+            </div>
+            <div class="col s2"> 
+                <input type="text" name="direction"  placeholder="Direction" ng-model="newData.direction">
+            </div>
+            <div class="col s2">
+                <input class="btn btn-success" type="submit" ng-click="addToTable(newData)" value="Add" />
+            </div>
+        </form>
+        </p>
     </div>
 
-    <p class="col s8">
-    <form class="pthInput form-group">
-        <div class="col s2">
-            <input type="text" name="distance" placeholder="Distance" ng-model="newData.distance">
+    <div class="row">
+        <div class="col s4">
+        	<table class="bordered">
+        		<thead>
+        			<th>Distance</th>
+        			<th>Proximity</th>
+        			<th>Direction</th>
+                    <th></th>
+        		</thead>
+        		<tbody>
+        			<tr ng-repeat="row in table | limitTo:10">
+        				<td>{{row.distance}}</td>
+        				<td>{{row.pth}}</td>
+        				<td>{{row.direction}}</td>
+                        <td ng-click="deletePth(row._id)"><a href=""><i class="mdi-content-clear"></i></a></td>
+        			</tr>
+        		</tbody>
+        	</table>
         </div>
-        <div class="col s2">
-            <input type="text" name="pth"  placeholder="Proximity to Hole" ng-model="newData.pth">
-        </div>
-        <div class="col s2"> 
-            <input type="text" name="direction"  placeholder="Direction" ng-model="newData.direction">
-        </div>
-        <div class="col s2">
-            <input class="btn btn-success" type="submit" ng-click="addToTable(newData)" value="Add" />
-        </div>
-    </form>
-    </p>
-</div>
 
-<div class="row">
-    <div class="col s6">
-    	<table class="bordered">
-    		<thead>
-    			<th>Distance</th>
-    			<th>Proximity to Hole</th>
-    			<th>Direction</th>
-                <th></th>
-    		</thead>
-    		<tbody>
-    			<tr ng-repeat="row in table">
-    				<td>{{row.distance}}</td>
-    				<td>{{row.pth}}</td>
-    				<td>{{row.direction}}</td>
-                    <td ng-click="deletePth(row._id)"><a href=""><i class="mdi-content-clear"></i></a></td>
-    			</tr>
-    		</tbody>
-    	</table>
-    </div>
-
-    <div class="col s6">
-        <pth-graph class="pth-graph grow"></pth-graph> 
-        <!-- <div line-graph></div> -->
+        <div class="col s8">
+            <p>Average: <i>{{getAverage(graphMin, graphMax)}}</i></p>
+            <p class="range-field">
+                <input type="range" value="70" ng-model="graphMin" name="graphMin" min="50" max="300"/>
+            </p>
+            <p class="range-field">
+                <input type="range" value="200" ng-model="graphMax" name="graphMax" min="50" max="300"/>
+            </p>
+            <!-- <pth-graph tournament="{{tournament._id}}"  class="pth-graph grow"></pth-graph>  -->
+            <div line-graph data="table"></div>
+        </div>
     </div>
 </div>

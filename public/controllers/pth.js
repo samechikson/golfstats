@@ -5,6 +5,10 @@ angular.module('golfDataMeanApp')
 	$scope.newData = {};
     $scope.table = [];
     $scope.tournament = {};
+    $scope.graphMin = 50;
+    $scope.graphMax = 300;
+
+    console.log($scope);
     
     document.querySelector('input:first-of-type').focus();
 
@@ -13,7 +17,8 @@ angular.module('golfDataMeanApp')
 
         DbService.getAllWithFieldId('pth', 'tournament', $scope.tournament._id).then(function(response){
             //console.log(response.data);
-            $scope.table = response.data;
+            $scope.table = response.data.reverse();
+            //$scope.average = $scope.getAverage(response.data, 50, 300);
         }, function(err){
             console.warn(err);
         });
@@ -46,5 +51,20 @@ angular.module('golfDataMeanApp')
             //success
             $route.reload();
         });
+    }
+
+    $scope.getAverage = function(min, max){
+        var avg = 0;
+        var count = 0;
+        var data = $scope.table;
+        for (var i in data){
+            if (data[i].distance >= min && data[i].distance <= max){
+                avg += data[i].pth;
+                count++;
+            }
+        }
+        //console.log(avg);
+
+        return (avg/count).toFixed(2);
     }
   }]);

@@ -1,12 +1,13 @@
-'use strict';
+"use strict";
 
 angular.module('golfDataMeanApp')
 .controller('MainCtrl', ['$scope', '$route', 'DbService', function ($scope, $route, DbService) {
 	$scope.tournaments = [];
 	$scope.selectedTourney = {};
+	//console.log(DbService);
 
 	DbService.getAll('tournament').then(function(response){
-		//console.log(response.data);
+		console.log(response.data);
 		$scope.tournaments = response.data;
 		$scope.selectedTourney = response.data[0] || {name: "No tournaments"};
 	});

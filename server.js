@@ -11,7 +11,7 @@ var methodOverride = require('method-override');
 var db = require('./config/db');
 
 // set our port
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 3000; 
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json 

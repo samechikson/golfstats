@@ -9,7 +9,7 @@ var pthSchema = new Schema({
 	endDate: Date,
 	tour: String,
 	location: String
-})
+});
 
 // module.exports allows us to pass this to other files when it is called
 module.exports = mongoose.model('Tournament', pthSchema);
