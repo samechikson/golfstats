@@ -1,7 +1,7 @@
 angular.module('golfDataMeanApp')
 	.directive('lineGraph', function() {
 
-  	  	var margin = {top: 20, right: 20, bottom: 30, left: 40};
+  	  	var margin = {top: 10, right: 10, bottom: 30, left: 40};
 
 	    return {
 	      restrict: 'EA',
@@ -18,6 +18,9 @@ angular.module('golfDataMeanApp')
          			 .domain([0,50])
 			    	 .range([height, 0]);
 
+			var xAxis = d3.svg.axis().scale(x).orient("bottom");
+			var yAxis = d3.svg.axis().scale(y);
+
 	        var svg = d3.select(element[0]).append('svg')
 	            .attr('width', width + margin.left + margin.right)
 	            .attr('height', height + margin.top + margin.bottom)
@@ -26,6 +29,12 @@ angular.module('golfDataMeanApp')
 	        graph = svg.append('g')
 	            .attr('class','graph')
 	            .attr('transform', 'translate(' + margin.left + ','+ margin.top+')');
+
+	        graph.append('g')
+    			  .attr('class', 'axis')
+    			  .attr('transform', 'translate(0, '+ (height + margin.top) +')')
+	        	  .call(xAxis);
+
 
 			scope.$watch('data', function(data){
 				console.log(data);
